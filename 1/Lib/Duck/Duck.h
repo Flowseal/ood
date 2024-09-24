@@ -17,10 +17,12 @@ public:
 		std::unique_ptr<IQuackBehavior>&& quackBehavior,
 		std::unique_ptr<IDanceBehavior>&& danceBehavior)
 		: m_quackBehavior(std::move(quackBehavior))
+		, m_flyBehavior(std::move(flyBehavior))
+		, m_danceBehavior(std::move(danceBehavior))
 	{
 		assert(m_quackBehavior);
-		SetFlyBehavior(std::move(flyBehavior));
-		SetDanceBehavior(std::move(danceBehavior));
+		assert(m_flyBehavior);
+		assert(m_danceBehavior);
 	}
 
 	void Quack() const
