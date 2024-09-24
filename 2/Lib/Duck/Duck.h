@@ -36,6 +36,11 @@ public:
 	void Fly()
 	{
 		m_flyBehavior->Fly();
+
+		if (m_flyBehavior->GetFlighCount() > 0 && m_flyBehavior->GetFlighCount() % 2 == 0)
+		{
+			m_quackBehavior->Quack();
+		}
 	}
 
 	void Dance()
@@ -53,6 +58,12 @@ public:
 	{
 		assert(danceBehavior);
 		m_danceBehavior = std::move(danceBehavior);
+	}
+
+	void SetQuackBehavior(std::unique_ptr<IQuackBehavior>&& quackBehavior)
+	{
+		assert(quackBehavior);
+		m_quackBehavior = std::move(quackBehavior);
 	}
 
 	virtual void Display() const = 0;
