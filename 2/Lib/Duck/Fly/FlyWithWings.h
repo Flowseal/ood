@@ -13,7 +13,7 @@ public:
 		std::cout << "I'm flying with wings!! Fligh number " << m_flighCount << std::endl;
 	}
 
-	int GetFlighCount() override
+	int GetFlighCount() const override
 	{
 		return m_flighCount;
 	}

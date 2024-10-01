@@ -7,7 +7,7 @@ class FlyNoWay : public IFlyBehavior
 {
 public:
 	void Fly() override {}
-	int GetFlighCount() override
+	int GetFlighCount() const override
 	{
 		return 0;
 	}
