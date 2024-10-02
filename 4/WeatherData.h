@@ -73,7 +73,6 @@ public:
 	}
 
 protected:
-	virtual void Update(SWeatherInfo const& data, const CObservable<SWeatherInfo>* observable) = 0;
 	CObservable<SWeatherInfo>* m_weatherDataIn;
 	CObservable<SWeatherInfo>* m_weatherDataOut;
 };
