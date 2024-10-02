@@ -28,6 +28,53 @@ private:
 	}
 };
 
+class CStat
+{
+public:
+	void Update(double newValue)
+	{
+		if (m_min > newValue)
+		{
+			m_min = newValue;
+		}
+		if (m_max < newValue)
+		{
+			m_max = newValue;
+		}
+		m_summary += newValue;
+		++m_count;
+	}
+
+	double GetMin() const
+	{
+		return m_min;
+	}
+
+	double GetMax() const
+	{
+		return m_max;
+	}
+
+	double GetAvg() const
+	{
+		return m_summary / static_cast<double>(m_count);
+	}
+
+	void Display(const std::string& statName) const
+	{
+		std::cout << "Min " << statName << ": " << m_min << std::endl;
+		std::cout << "Max " << statName << ": " << m_max << std::endl;
+		std::cout << "Average " << statName << ": " << GetAvg() << std::endl;
+		std::cout << "----------------" << std::endl;
+	}
+
+private:
+	double m_min = std::numeric_limits<double>::infinity();
+	double m_max = -std::numeric_limits<double>::infinity();
+	double m_summary = 0;
+	unsigned int m_count = 0;
+};
+
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
 private:
@@ -37,45 +84,35 @@ private:
 	*/
 	void Update(SWeatherInfo const& data) override
 	{
-		if (m_minTemperature > data.temperature)
-		{
-			m_minTemperature = data.temperature;
-		}
-		if (m_maxTemperature < data.temperature)
-		{
-			m_maxTemperature = data.temperature;
-		}
-		m_accTemperature += data.temperature;
-		++m_countAcc;
+		m_temperature.Update(data.temperature);
+		m_humidity.Update(data.humidity);
+		m_pressure.Update(data.pressure);
 
-		std::cout << "Max Temp " << m_maxTemperature << std::endl;
-		std::cout << "Min Temp " << m_minTemperature << std::endl;
-		std::cout << "Average Temp " << (m_accTemperature / m_countAcc) << std::endl;
-		std::cout << "----------------" << std::endl;
+		m_temperature.Display("Temperature");
+		m_humidity.Display("Humidity");
+		m_pressure.Display("Pressure");
 	}
 
-	double m_minTemperature = std::numeric_limits<double>::infinity();
-	double m_maxTemperature = -std::numeric_limits<double>::infinity();
-	double m_accTemperature = 0;
-	unsigned m_countAcc = 0;
-
+	CStat m_temperature;
+	CStat m_humidity;
+	CStat m_pressure;
 };
 
 class CWeatherData : public CObservable<SWeatherInfo>
 {
 public:
 	// Температура в градусах Цельсия
-	double GetTemperature()const
+	double GetTemperature() const
 	{
 		return m_temperature;
 	}
 	// Относительная влажность (0...100)
-	double GetHumidity()const
+	double GetHumidity() const
 	{
 		return m_humidity;
 	}
 	// Атмосферное давление (в мм.рт.ст)
-	double GetPressure()const
+	double GetPressure() const
 	{
 		return m_pressure;
 	}
@@ -94,7 +131,7 @@ public:
 		MeasurementsChanged();
 	}
 protected:
-	SWeatherInfo GetChangedData()const override
+	SWeatherInfo GetChangedData() const override
 	{
 		SWeatherInfo info;
 		info.temperature = GetTemperature();

@@ -1,7 +1,12 @@
 ﻿#pragma once
 
 #include <set>
-#include <functional>
+
+template <typename T>
+class IObservable;
+
+template <typename T>
+class CObservable;
 
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс, 
@@ -13,8 +18,13 @@ template <typename T>
 class IObserver
 {
 public:
-	virtual void Update(T const& data) = 0;
 	virtual ~IObserver() = default;
+
+protected:
+	virtual void Update(T const& data) = 0;
+	IObservable<T>* m_subject;
+
+	friend class CObservable<T>;
 };
 
 /*
@@ -27,7 +37,6 @@ class IObservable
 public:
 	virtual ~IObservable() = default;
 	virtual void RegisterObserver(IObserver<T> & observer) = 0;
-	virtual void NotifyObservers() = 0;
 	virtual void RemoveObserver(IObserver<T> & observer) = 0;
 };
 
@@ -41,26 +50,30 @@ public:
 	void RegisterObserver(ObserverType & observer) override
 	{
 		m_observers.insert(&observer);
-	}
-
-	void NotifyObservers() override
-	{
-		T data = GetChangedData();
-		for (auto & observer : m_observers)
-		{
-			observer->Update(data);
-		}
+		observer.m_subject = this;
 	}
 
 	void RemoveObserver(ObserverType & observer) override
 	{
 		m_observers.erase(&observer);
+		observer.m_subject = nullptr;
 	}
 
 protected:
+	void NotifyObservers()
+	{
+		T data = GetChangedData();
+		const auto observersCopy = m_observers;
+
+		for (auto& observer : observersCopy)
+		{
+			observer->Update(data);
+		}
+	}
+
 	// Классы-наследники должны перегрузить данный метод, 
 	// в котором возвращать информацию об изменениях в объекте
-	virtual T GetChangedData()const = 0;
+	virtual T GetChangedData() const = 0;
 
 private:
 	std::set<ObserverType *> m_observers;

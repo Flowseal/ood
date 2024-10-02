@@ -13,21 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\1">
+      <UniqueIdentifier>{034315a5-9160-4457-8db9-7e895d91ff90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lib.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="4\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Observer.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="1\Observer.h">
+      <Filter>Source Files\1</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherData.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="1\WeatherData.h">
+      <Filter>Source Files\1</Filter>
+    </ClInclude>
+    <ClInclude Include="2\Observer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="2\WeatherData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3\Observer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3\WeatherData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="4\Observer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="4\WeatherData.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
