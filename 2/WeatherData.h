@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include <iostream>
-#include <vector>
+#include "Observer.h"
 #include <algorithm>
 #include <climits>
-#include "Observer.h"
+#include <iostream>
+#include <vector>
 
 struct SWeatherInfo
 {
@@ -12,7 +12,7 @@ struct SWeatherInfo
 	double pressure = 0;
 };
 
-class CDisplay: public IObserver<SWeatherInfo>
+class CDisplay : public IObserver<SWeatherInfo>
 {
 private:
 	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
@@ -60,14 +60,6 @@ public:
 		return m_summary / static_cast<double>(m_count);
 	}
 
-	void Display(const std::string& statName) const
-	{
-		std::cout << "Min " << statName << ": " << m_min << std::endl;
-		std::cout << "Max " << statName << ": " << m_max << std::endl;
-		std::cout << "Average " << statName << ": " << GetAvg() << std::endl;
-		std::cout << "----------------" << std::endl;
-	}
-
 private:
 	double m_min = std::numeric_limits<double>::infinity();
 	double m_max = -std::numeric_limits<double>::infinity();
@@ -88,9 +80,17 @@ private:
 		m_humidity.Update(data.humidity);
 		m_pressure.Update(data.pressure);
 
-		m_temperature.Display("Temperature");
-		m_humidity.Display("Humidity");
-		m_pressure.Display("Pressure");
+		Display(m_temperature, "Temperature");
+		Display(m_humidity, "Humidity");
+		Display(m_pressure, "Pressure");
+	}
+
+	void Display(const CStat& stat, const std::string& statName) const
+	{
+		std::cout << "Min " << statName << ": " << stat.GetMin() << std::endl;
+		std::cout << "Max " << statName << ": " << stat.GetMax() << std::endl;
+		std::cout << "Average " << statName << ": " << stat.GetAvg() << std::endl;
+		std::cout << "----------------" << std::endl;
 	}
 
 	CStat m_temperature;
@@ -130,6 +130,7 @@ public:
 
 		MeasurementsChanged();
 	}
+
 protected:
 	SWeatherInfo GetChangedData() const override
 	{
@@ -139,8 +140,9 @@ protected:
 		info.pressure = GetPressure();
 		return info;
 	}
+
 private:
 	double m_temperature = 0.0;
-	double m_humidity = 0.0;	
-	double m_pressure = 760.0;	
+	double m_humidity = 0.0;
+	double m_pressure = 760.0;
 };

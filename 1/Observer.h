@@ -9,7 +9,7 @@ template <typename T>
 class CObservable;
 
 /*
-Шаблонный интерфейс IObserver. Его должен реализовывать класс, 
+Шаблонный интерфейс IObserver. Его должен реализовывать класс,
 желающий получать уведомления от соответствующего IObservable
 Параметром шаблона является тип аргумента,
 передаваемого Наблюдателю в метод Update
@@ -64,6 +64,7 @@ protected:
 	{
 		T data = GetChangedData();
 
+		// TODO разобраться почему (range base for)
 		for (auto& observer : m_observers)
 		{
 			observer->Update(data);

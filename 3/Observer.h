@@ -10,7 +10,6 @@ class IObservable;
 template <typename T>
 class CObservable;
 
-
 template <typename T>
 class IObserver
 {
@@ -19,19 +18,18 @@ public:
 
 protected:
 	virtual void Update(T const& data) = 0;
-	IObservable<T>* m_subject;
+	IObservable<T>* m_subject; // todo вынести в реализ
 
 	friend class CObservable<T>;
 };
-
 
 template <typename T>
 class IObservable
 {
 public:
 	virtual ~IObservable() = default;
-	virtual void RegisterObserver(IObserver<T> & observer, int priority) = 0;
-	virtual void RemoveObserver(IObserver<T> & observer) = 0;
+	virtual void RegisterObserver(IObserver<T>& observer, int priority) = 0;
+	virtual void RemoveObserver(IObserver<T>& observer) = 0;
 };
 
 template <class T>
@@ -40,7 +38,7 @@ class CObservable : public IObservable<T>
 public:
 	typedef IObserver<T> ObserverType;
 
-	void RegisterObserver(ObserverType & observer, int priority) override
+	void RegisterObserver(ObserverType& observer, int priority) override
 	{
 		auto pair = m_priorityToObservers.insert({ priority, {} });
 		pair.first->second.insert(&observer);
@@ -48,7 +46,7 @@ public:
 		observer.m_subject = this;
 	}
 
-	void RemoveObserver(ObserverType & observer) override
+	void RemoveObserver(ObserverType& observer) override
 	{
 		auto it = m_observerToPriority.find(&observer);
 		if (it != m_observerToPriority.end())

@@ -18,7 +18,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="4\main.cpp">
+    <ClCompile Include="2\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
