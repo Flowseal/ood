@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Ellipse.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc" />
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="RegularPolygon.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapesFactory.cpp">
+      <Filter>ShapesFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="MockCanvas.h">
+      <Filter>Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="MockDesigner.h">
+      <Filter>Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="MockPainter.h">
+      <Filter>Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="MockShape.h">
+      <Filter>Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="MockShapeFactory.h">
+      <Filter>Mocks</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Mocks">
+      <UniqueIdentifier>{1ba689fe-db52-4f83-a1c3-69cc4b07481d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shapes">
+      <UniqueIdentifier>{43d0fd90-49cf-4ac0-8562-ac1eab8a29d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShapesFactory">
+      <UniqueIdentifier>{77fc001b-92a6-4eb0-9017-3dd469ca73e7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
