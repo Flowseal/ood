@@ -3,7 +3,7 @@
 #include "../libs/modern_graphics_lib.h"
 
 class CModernGraphicsToGraphicsClassAdapter : public graphics_lib::ICanvas
-	, public modern_graphics_lib::CModernGraphicsRenderer
+	, private modern_graphics_lib::CModernGraphicsRenderer
 {
 public:
 	CModernGraphicsToGraphicsClassAdapter(std::ostream& strm)
@@ -11,6 +11,7 @@ public:
 		, m_pos(0, 0)
 		, m_color(0.f, 0.f, 0.f, 1.f)
 	{
+		BeginDraw();
 	}
 
 	void SetColor(uint32_t rgbaColor) override

@@ -47,7 +47,7 @@ public:
 
 	void BeginDraw()
 	{
-		if (m_drawing) // «авершаем рисование, если оно было начато
+		if (m_drawing)
 		{
 			throw std::logic_error("Drawing has already begun");
 		}

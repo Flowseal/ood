@@ -1,11 +1,11 @@
 ﻿#include <iostream>
 #include <string>
 
+#include "adapters/ModernGraphicsClassAdapter.h"
+#include "adapters/ModernGraphicsObjectAdapter.h"
 #include "libs/graphics_lib.h"
 #include "libs/modern_graphics_lib.h"
 #include "libs/shape_drawing_lib.h"
-#include "adapters/ModernGraphicsClassAdapter.h"
-#include "adapters/ModernGraphicsObjectAdapter.h"
 
 namespace app
 {
@@ -34,20 +34,16 @@ void PaintPictureOnModernGraphicsRenderer()
 	CModernGraphicsToGraphicsObjectAdapter adaptedModernRenderer(renderer);
 	shape_drawing_lib::CCanvasPainter painter(adaptedModernRenderer);
 
-	renderer.BeginDraw();
 	PaintPicture(painter);
-	renderer.EndDraw();
 }
 
-//void PaintPictureOnModernGraphicsRenderer()
+// void PaintPictureOnModernGraphicsRenderer()
 //{
 //	CModernGraphicsToGraphicsClassAdapter adaptedModernRenderer(std::cout);
 //	shape_drawing_lib::CCanvasPainter painter(adaptedModernRenderer);
 //
-//	adaptedModernRenderer.BeginDraw();
 //	PaintPicture(painter);
-//	adaptedModernRenderer.EndDraw();
-//}
+// }
 } // namespace app
 
 int main()

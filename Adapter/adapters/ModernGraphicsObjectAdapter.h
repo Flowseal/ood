@@ -10,6 +10,7 @@ public:
 		, m_pos(0, 0)
 		, m_color(0.f, 0.f, 0.f, 1.f)
 	{
+		m_renderer.BeginDraw();
 	}
 
 	void SetColor(uint32_t rgbaColor) override
