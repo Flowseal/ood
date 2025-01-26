@@ -11,8 +11,10 @@ class ShapeParametersVisitor : public IShapeVisitor
 public:
     void visitCircle(const Circle& circle) override
     {
-        m_perimeter = 2 * 3.14f * circle.getRadius();
-        m_area = 3.14f * circle.getRadius() * circle.getRadius();
+        const auto& radius = circle.getRadius();
+
+        m_perimeter = 2 * 3.14f * radius;
+        m_area = 3.14f * radius * radius;
     }
 
     void visitRectangle(const Rectangle& rectangle) override
